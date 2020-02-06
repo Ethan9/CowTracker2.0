@@ -4,7 +4,7 @@
         <input type="text" v-model="email"  placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br>
         <button @click="signUp">Sign Up</button>
-        <span>or go back to <router-link to="/login"> login.</router-link></span>
+        <span>or go back to <router-link to="/login"> login</router-link>.</span>
     </div>
 </template>
 
@@ -22,8 +22,8 @@ export default {
   methods: {
     signUp: function () {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-        function (user) {
-          alert('Your account has been created !')
+        (user) => {
+          this.$router.replace('home')
         },
         function (err) {
           alert('Oops. ' + err.message)

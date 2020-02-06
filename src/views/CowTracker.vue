@@ -1,29 +1,21 @@
 <template>
-  <div id="home">
+  <div id="cow">
     <Navigation></Navigation>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Cows"/>
     <button @click="logout">Logout</button>
     <router-view/>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
 import HelloWorld from '@/components/HelloWorld.vue'
 import Navigation from '@/components/Nav'
 
 export default {
-  name: 'home',
+  name: 'cowtracker',
   components: {
     HelloWorld,
     'Navigation': Navigation
-  },
-  methods: {
-    logout: function () {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
-      })
-    }
   }
 }
 </script>
