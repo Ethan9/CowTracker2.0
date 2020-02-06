@@ -4,8 +4,6 @@
       <router-link class="spacing" v-for="routes in links"
       v-bind:key="routes.id"
       :to="`${routes.page}`">{{routes.text}}</router-link>
-
-      <p><router-link to="/cow">test</router-link></p>
     </nav>
   </div>
 </template>
@@ -33,8 +31,8 @@ export default {
         },
         {
           id: 3,
-          text: 'Contact',
-          page: '/Contact'
+          text: 'Cows',
+          page: '/cow'
         }
       ]
     }

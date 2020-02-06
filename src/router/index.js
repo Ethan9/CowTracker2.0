@@ -31,7 +31,10 @@ const router = new Router({
     {
       path: '/cow',
       name: 'cowtracker',
-      component: CowTracker
+      component: CowTracker,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/home',

@@ -4,7 +4,7 @@
         <input type="text" v-model="email"  placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br>
         <button @click="signUp">Sign Up</button>
-        <span>or go back to <router-link to="/login"> login.</router-link></span>
+        <span>or go back to <router-link to="/login"> login</router-link>.</span>
     </div>
 </template>
 
@@ -53,5 +53,4 @@ span {
     margin-top: 20px;
     font-size: 11px;
 }
-
 </style>
