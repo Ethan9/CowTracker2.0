@@ -68,16 +68,6 @@ export default {
         this.$router.replace('login')
       })
     }
-  },
-  mounted () {
-    console.log(this.show)
-  },
-
-  props: {
-    show: {
-      type: Object,
-      required: true
-    }
   }
 }
 </script>
