@@ -1,18 +1,49 @@
 <template>
-    <div class="sign-up">
-        <p>Let's create a new account !</p>
-        <input type="text" v-model="email"  placeholder="Email"><br>
-        <input type="password" v-model="password" placeholder="Password"><br>
-        <button @click="signUp">Sign Up</button>
-        <span>or go back to <router-link to="/login"> login</router-link>.</span>
+  <div class="sign-up">
+    <Navigation></Navigation>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <h3>Let's create a new account !</h3>
+          <b-form>
+            <b-form-group
+              id="input-group-1"
+              label="Email address:"
+              label-for="input-1"
+              description="We'll never share your email with anyone else."
+            >
+              <b-form-input id="input-1" v-model="email" type="email" required placeholder="Email"></b-form-input>
+            </b-form-group>
+            <b-form-group id="input-group-2" label="Your Password:" label-for="input-2">
+              <b-form-input
+                id="input-2"
+                type="password"
+                v-model="password"
+                required
+                placeholder="Password"
+              ></b-form-input>
+            </b-form-group>
+            <b-button @click="signUp">Connection</b-button>
+          </b-form>
+           <p>
+              Already have an account? ? You can
+              <router-link class="underline" to="/login">log in</router-link>
+            </p>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import firebase from 'firebase'
+import Navigation from '@/components/Nav'
 
 export default {
   name: 'signUp',
+  components: {
+    Navigation: Navigation
+  },
   data () {
     return {
       email: '',
@@ -21,36 +52,24 @@ export default {
   },
   methods: {
     signUp: function () {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-        (user) => {
-          this.$router.replace('home')
-        },
-        function (err) {
-          alert('Oops. ' + err.message)
-        }
-      )
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            this.$router.replace('home')
+          },
+          function (err) {
+            alert('Oops. ' + err.message)
+          }
+        )
     }
   }
 }
 </script>
 
 <style scoped>
-.signUp {
-    margin-top: 40px;
-}
-input {
-    margin: 10px 0;
-    width: 20%;
-    padding: 15px;
-}
-button {
-    margin-top: 10px;
-    width: 10%;
-    cursor: pointer;
-}
-span {
-    display: block;
-    margin-top: 20px;
-    font-size: 11px;
+.underline {
+  text-decoration: underline;
 }
 </style>

@@ -2,9 +2,13 @@ import Vue from 'vue'
 import firebase from 'firebase'
 import App from './App.vue'
 import router from './router'
+import { store } from './store/store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
@@ -27,6 +31,7 @@ firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
       router,
+      store: store,
       render: h => h(App)
     }).$mount('#app')
   }

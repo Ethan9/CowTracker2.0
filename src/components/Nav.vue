@@ -15,15 +15,16 @@
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav v-if="user" class="ml-auto">
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-            <em>User</em>
+            <em id="email"></em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-dropdown-item v-if="!user"> <router-link to="/sign-up"> Sign in </router-link></b-dropdown-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -34,8 +35,16 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import firebase from 'firebase'
+// import login from '@/views/Login.vue'
+
+// var email = login.returnEmail
 
 export default {
+  computed: {
+    user () {
+      return this.$store.getters.getUser
+    }
+  },
   name: 'Navigation',
   data () {
     return {
@@ -59,6 +68,16 @@ export default {
         this.$router.replace('login')
       })
     }
+  },
+  mounted () {
+    console.log(this.show)
+  },
+
+  props: {
+    show: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>
@@ -66,6 +85,7 @@ export default {
 <style>
   .spacing {
     Margin-right: 10px;
+    text-decoration: slateblue;
   }
   b-navbar {
     color: black;
