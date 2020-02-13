@@ -27,12 +27,15 @@ firebase.initializeApp({
   measurementId: 'G-JFNHBR45PD'
 })
 
-firebase.auth().onAuthStateChanged(() => {
-  if (!app) {
-    app = new Vue({
-      router,
-      store: store,
-      render: h => h(App)
-    }).$mount('#app')
-  }
+firebase.auth().onAuthStateChanged((user) => {
+  store.commit('setUser', user)
+  console.log('USER : ', user)
 })
+
+if (!app) {
+  app = new Vue({
+    router,
+    store: store,
+    render: h => h(App)
+  }).$mount('#app')
+}

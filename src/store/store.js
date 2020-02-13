@@ -17,12 +17,16 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    setUser: state => {
-      state.user = Firebase.auth().currentUser
+    // setUser: state => {
+    //   state.user = Firebase.auth().currentUser
+    // },
+    setUser: (state, user) => {
+      // state.user = Firebase.auth().currentUser
+      state.user = user
     },
-    setUserName: state => {
-      state.userName = Firebase.auth().currentUser.email
-    }
+    // setUserName: state => {
+    //   state.userName = Firebase.auth().currentUser.email
+    // }
   },
   actions: {
     setUser: context => {

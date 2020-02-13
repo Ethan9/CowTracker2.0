@@ -23,7 +23,7 @@
                 placeholder="Password"
               ></b-form-input>
             </b-form-group>
-            <b-button @click="login">Connection</b-button>
+            <b-button @click="login">Login</b-button>
             <p>
               You don't have an account ? You can
               <router-link class="underline" to="/sign-up">create one</router-link>
@@ -38,6 +38,7 @@
 <script>
 import firebase from 'firebase'
 import Navigation from '@/components/Nav'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'login',
@@ -50,15 +51,20 @@ export default {
       password: ''
     }
   },
+  computed: {
+    ...mapGetters(['getUser'])
+  },
+  watch: {
+    getUser () {
+      this.$router.push('home')
+    }
+  },
   methods: {
     login: function () {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
-          user => {
-            this.$router.replace('home')
-          },
           err => {
             alert('Oops. ' + err.message)
           }

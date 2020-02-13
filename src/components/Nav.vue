@@ -1,7 +1,7 @@
 <template>
   <div class="navBar">
     <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand @click="home">CowTracker</b-navbar-brand>
+    <b-navbar-brand>CowTracker</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -19,7 +19,7 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
-            <em id="email"></em>
+            <em id="email">{{ user.email }}</em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
@@ -35,16 +35,12 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import firebase from 'firebase'
+import { mapGetters } from 'vuex'
 // import login from '@/views/Login.vue'
 
 // var email = login.returnEmail
 
 export default {
-  computed: {
-    user () {
-      return this.$store.getters.getUser
-    }
-  },
   name: 'Navigation',
   data () {
     return {
@@ -61,6 +57,11 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'getUser'
+    })
   },
   methods: {
     logout: function () {
