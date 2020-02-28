@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
     setUser: (state, user) => {
       // state.user = Firebase.auth().currentUser
       state.user = user
-    },
+    }
     // setUserName: state => {
     //   state.userName = Firebase.auth().currentUser.email
     // }

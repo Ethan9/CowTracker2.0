@@ -64,11 +64,6 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          err => {
-            alert('Oops. ' + err.message)
-          }
-        )
     },
     returnEmail: function () {
       var userEmail = this.email
