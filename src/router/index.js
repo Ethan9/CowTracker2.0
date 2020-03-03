@@ -5,6 +5,7 @@ import Login from '@/views/Login.vue'
 import SignUp from '@/views/SignUp.vue'
 import CowTracker from '@/views/CowTracker.vue'
 import firebase from 'firebase'
+import Profile from '@/views/Profile.vue'
 
 Vue.use(Router)
 
@@ -32,6 +33,14 @@ const router = new Router({
       path: '/cow',
       name: 'cowtracker',
       component: CowTracker,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
         requiresAuth: true
       }

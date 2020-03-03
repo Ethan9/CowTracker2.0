@@ -21,10 +21,10 @@
           <template v-slot:button-content>
             <em id="email">{{ user.email }}</em>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item @click="profile">Profile</b-dropdown-item>
           <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-dropdown-item v-if="!user"> <router-link to="/sign-up"> Sign in </router-link></b-dropdown-item>
+        <b-dropdown-item v-if="!user" @click="sign-up">Sign Up</b-dropdown-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -68,6 +68,9 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$router.replace('login')
       })
+    },
+    profile: function () {
+      this.$router.replace('profile')
     }
   }
 }

@@ -32,13 +32,12 @@ firebase.auth().onAuthStateChanged((user) => {
   console.log('USER : ', user)
 })
 
-export const db = firebase.database()
+export const db = firebase.firestore()
 
 if (!app) {
   app = new Vue({
     router,
     created () {
-
     },
     store: store,
     render: h => h(App)
