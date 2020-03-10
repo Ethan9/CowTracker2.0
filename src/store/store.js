@@ -13,6 +13,9 @@ export const store = new Vuex.Store({
     },
     getUserName: state => {
       return state.userName
+    },
+    getFarmID: state => {
+      return state.farmID
     }
   },
   mutations: {
@@ -22,6 +25,9 @@ export const store = new Vuex.Store({
     setUser: (state, user) => {
       // state.user = Firebase.auth().currentUser
       state.user = user
+    },
+    setFarmID: (state, farmID) => {
+      state.farmID = farmID
     }
     // setUserName: state => {
     //   state.userName = Firebase.auth().currentUser.email

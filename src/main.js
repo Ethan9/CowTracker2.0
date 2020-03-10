@@ -29,7 +29,6 @@ firebase.initializeApp({
 
 firebase.auth().onAuthStateChanged((user) => {
   store.commit('setUser', user)
-  console.log('USER : ', user)
 })
 
 export const db = firebase.firestore()

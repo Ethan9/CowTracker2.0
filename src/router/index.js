@@ -6,6 +6,7 @@ import SignUp from '@/views/SignUp.vue'
 import CowTracker from '@/views/CowTracker.vue'
 import firebase from 'firebase'
 import Profile from '@/views/Profile.vue'
+import ScanScreen from '@/views/ScanScreen.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,14 @@ const router = new Router({
       path: '/sign-up',
       name: 'signUp',
       component: SignUp
+    },
+    {
+      path: '/scan-screen',
+      name: 'scanScreen',
+      component: ScanScreen,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/cow',
