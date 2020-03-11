@@ -16,6 +16,9 @@ export const store = new Vuex.Store({
     },
     getFarmID: state => {
       return state.farmID
+    },
+    getFarmName: state => {
+      return state.farmName
     }
   },
   mutations: {
@@ -28,6 +31,9 @@ export const store = new Vuex.Store({
     },
     setFarmID: (state, farmID) => {
       state.farmID = farmID
+    },
+    setFarmName: (state, farmName) => {
+      state.farmName = farmName
     }
     // setUserName: state => {
     //   state.userName = Firebase.auth().currentUser.email
@@ -39,6 +45,12 @@ export const store = new Vuex.Store({
     },
     setUserName: context => {
       context.commit('setUserName')
+    },
+    setFarmID: context => {
+      context.commit('setFarmID')
+    },
+    setFarmName: context => {
+      context.commit('setFarmName')
     }
   }
 })

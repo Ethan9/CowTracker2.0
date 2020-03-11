@@ -100,6 +100,7 @@ export default {
     },
     saveData: function () {
       this.$store.commit('setFarmID', this.farmID)
+      this.$store.commit('setFarmName', this.farmName)
       db.collection('farmID')
         .doc(this.farmID)
         .set({
@@ -124,6 +125,11 @@ export default {
       county: '',
       country: '',
       farmID: ''
+    }
+  },
+  watch: {
+    saveData () {
+      this.$router.push('scan')
     }
   }
 }

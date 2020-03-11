@@ -36,9 +36,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import firebase from 'firebase'
 import { mapGetters } from 'vuex'
-// import login from '@/views/Login.vue'
-
-// var email = login.returnEmail
 
 export default {
   name: 'Navigation',
@@ -54,6 +51,11 @@ export default {
           id: 1,
           text: 'Cows',
           page: '/cow'
+        },
+        {
+          id: 2,
+          text: 'Scan',
+          page: '/scan-screen'
         }
       ]
     }
