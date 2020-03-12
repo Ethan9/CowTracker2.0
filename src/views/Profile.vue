@@ -82,8 +82,8 @@
 
 <script>
 import Navigation from '@/components/Nav'
-import firebase from 'firebase'
 import { db } from '@/main.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'cowtracker',
@@ -91,22 +91,16 @@ export default {
     Navigation: Navigation
   },
   methods: {
-    login: function () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-    },
-    returnFarmName: function () {
-      var farmName = this.farmName
-      return farmName
-    },
     saveData: function () {
       this.$store.commit('setFarmID', this.farmID)
       this.$store.commit('setFarmName', this.farmName)
-      db.collection('farmID')
-        .doc(this.farmID)
+      db.collection('userEmail')
+        .doc(this.user.email)
         .set({
           farmName: this.farmName,
           county: this.county,
-          country: this.country
+          country: this.country,
+          farmID: this.farmID
         },
         { merge: true }
         )
@@ -131,6 +125,11 @@ export default {
     saveData () {
       this.$router.push('scan')
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'getUser'
+    })
   }
 }
 </script>
