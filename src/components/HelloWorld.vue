@@ -1,9 +1,5 @@
 <template>
   <div class="HelloWorld">
-    <h1>{{ msg }}</h1>
-    <p>
-      You're logged in!
-    </p>
   </div>
 </template>
 

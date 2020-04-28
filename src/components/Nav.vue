@@ -56,6 +56,11 @@ export default {
           id: 2,
           text: 'Scan',
           page: '/scan-screen'
+        },
+        {
+          id: 3,
+          text: 'Maps',
+          page: '/maps'
         }
       ]
     }

@@ -7,6 +7,7 @@ import CowTracker from '@/views/CowTracker.vue'
 import firebase from 'firebase'
 import Profile from '@/views/Profile.vue'
 import ScanScreen from '@/views/ScanScreen.vue'
+import Maps from '@/views/Maps.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,14 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/maps',
+      name: 'maps',
+      component: Maps,
       meta: {
         requiresAuth: true
       }

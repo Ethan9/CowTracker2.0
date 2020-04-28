@@ -7,17 +7,26 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuex from 'vuex'
+import * as VueGoogleMaps from 'vue2-google-maps'
+import GmapCluster from 'vue2-google-maps/dist/components/cluster'
 
+Vue.component('GmapCluster', GmapCluster)
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDTpeu3lK__IjlSpoOqXu6IiD9KAUjiGDw',
+    libraries: 'places'
+  }
+})
 
 Vue.config.productionTip = false
 
 let app = ''
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyArwQyr27jLG9laV0FJskxa1zuubrXQxeo',
+  apiKey: 'AIzaSyDTpeu3lK__IjlSpoOqXu6IiD9KAUjiGDw',
   authDomain: 'cowtracker-5b405.firebaseapp.com',
   databaseURL: 'https://cowtracker-5b405.firebaseio.com',
   projectId: 'cowtracker-5b405',

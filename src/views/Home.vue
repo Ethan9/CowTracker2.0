@@ -12,30 +12,16 @@
           </div>
         </div>
       </header>
-      <b-container>
-        <b-row>
-          <b-col class="content">
-            <HelloWorld msg="Welcome to Your Vue.js App" />
-          </b-col>
-        </b-row>
-      </b-container>
-      <section class="py-5">
-        <div class="container">
-          <h2 class="font-weight-light">Page Content</h2>
-          <p></p>
-        </div>
-      </section>
-    </div>
     <router-view />
     <b-card-footer>
       <p>An Ethan Lea Production</p>
     </b-card-footer>
   </div>
+  </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import HelloWorld from '@/components/HelloWorld.vue'
 import Navigation from '@/components/Nav'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -43,7 +29,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   name: 'home',
   components: {
-    HelloWorld,
     Navigation: Navigation
   },
   methods: {

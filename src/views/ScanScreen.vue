@@ -2,9 +2,6 @@
   <div>
     <div onload="pulldata()">
       <Navigation></Navigation>
-      <router-view />
-      <em id="farmID"></em>
-      <br />
       <b-form @submit.prevent="saveVac">
         <b-card bg-variant="light">
           <b-form-group
@@ -34,7 +31,21 @@
                   required
                   placeholder="Name of Vaccination"
                 ></b-form-input>
-              </b-form-group>
+                </b-form-group>
+              <b-form-group
+                label-cols-sm="3"
+                label="Number of Cows:"
+                label-align-sm="right"
+                label-for="input-1"
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="cowNum"
+                  type="cowNum"
+                  required
+                  placeholder="Number of Cows being Vaccinated"
+                ></b-form-input>
+                </b-form-group>
             </b-form-group>
           </b-form-group>
           <b-button type="submit" @click="showDiv()">Save</b-button>
@@ -73,7 +84,8 @@ export default {
         .doc(this.vacName)
         .set(
           {
-            vacVal: '1'
+            vacVal: '1',
+            cowNum: this.cowNum
           },
           { merge: true }
         )
@@ -94,10 +106,11 @@ export default {
   data: function () {
     return {
       system: '',
-      farmName: '',
+      vacName: '',
       county: '',
       country: '',
-      farmID: ''
+      farmID: '',
+      cowNum: ''
     }
   },
   computed: {

@@ -110,6 +110,24 @@ export default {
         .catch(function (error) {
           console.error('Error writing document: ', error)
         })
+    },
+    loadData: function () {
+      db.collection('userEmail')
+        .doc(this.user.email)
+        .get()
+        .then(doc => {
+          var input1 = document.getElementById('input-1')
+          var input2 = document.getElementById('input-2')
+          var input3 = document.getElementById('input-3')
+          var input4 = document.getElementById('input-4')
+
+          if (input1 != null || input2 != null || input3 != null || input4 != null) {
+            input1.placeholder = doc.data().farmName
+            input2.placeholder = doc.data().farmID
+            input3.placeholder = doc.data().county
+            input4.placeholder = doc.data().country
+          }
+        })
     }
   },
   data: function () {
@@ -130,6 +148,9 @@ export default {
     ...mapGetters({
       user: 'getUser'
     })
+  },
+  created: function () {
+    this.loadData()
   }
 }
 </script>
