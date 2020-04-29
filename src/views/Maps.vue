@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="test">
     <Navigation></Navigation>
     <div class="">
     <GmapMap
@@ -8,7 +8,7 @@
   map-type-id="terrain"
   style="width: 100%; height: 800px"
 >
-<GmapCluster>
+<GmapCluster :styles="clusterStyles" :grid-size="gridSize">
   <!-- <GmapCircle
     v-for="geoObject in $options.latLONG"
     :key="geoObject.id"
@@ -23,7 +23,6 @@
     :position="{lat: parseFloat(geoObject.lat), lng: parseFloat(geoObject.lng)}"
     :icon="markerOptions"
     :clickable="true"
-    :draggable="true"
     @click="center=m.position"
   />
 
@@ -37,6 +36,12 @@
 import Navigation from '@/components/Nav'
 import latLong from '@/assets/MOCK_DATA.json'
 const mapMarker = require('@/assets/cow.png')
+const mapMarkerHerd = require('@/assets/cow-herd.png')
+const mapMarkerHerdSmall = require('@/assets/cow-herd-small.png')
+const mapMarkerHerdMedium = require('@/assets/cow-herd-medium.png')
+const mapMarkerHerdLarge = require('@/assets/cow-herd-large.png')
+var clusterStyles
+console.log('../assets/cow-herd.png')
 
 export default {
   name: 'Maps',
@@ -44,16 +49,34 @@ export default {
   components: {
     Navigation: Navigation
   },
-  mounted () {
-    this.geolocate()
-  },
   data () {
     return {
       markerOptions: {
         url: mapMarker,
         size: { width: 100, height: 90, f: 'px', b: 'px' },
         scaledSize: { width: 45, height: 45, f: 'px', b: 'px' }
-      }
+      },
+      gridSize: 50,
+      clusterStyles: [
+        {
+          url: mapMarkerHerdSmall,
+          height: 58,
+          width: 77,
+          textSize: 1
+        },
+        {
+          url: mapMarkerHerdSmall,
+          height: 70,
+          width: 93,
+          textSize: 1
+        },
+        {
+          url: mapMarkerHerdSmall,
+          height: 100,
+          width: 133,
+          textSize: 1
+        }
+      ]
     }
   }
 }
