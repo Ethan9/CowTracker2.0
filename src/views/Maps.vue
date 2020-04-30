@@ -41,7 +41,6 @@ const mapMarkerHerdSmall = require('@/assets/cow-herd-small.png')
 const mapMarkerHerdMedium = require('@/assets/cow-herd-medium.png')
 const mapMarkerHerdLarge = require('@/assets/cow-herd-large.png')
 var clusterStyles
-console.log('../assets/cow-herd.png')
 
 export default {
   name: 'Maps',
