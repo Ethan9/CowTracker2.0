@@ -1,7 +1,8 @@
 <template>
   <div class="test">
     <Navigation></Navigation>
-    <div class="">
+    <div>
+      <h2>TB Cases Map</h2>
     <GmapMap
   :center="{lat: 53.486902, lng:-2.273551}"
   :zoom="6"
@@ -28,6 +29,13 @@
 
   </GmapCluster>
 </GmapMap>
+
+<b-container class="bv-example-row">
+  <b-row align-h="start">
+    <b-col>Cows represent farms with recent TB cases</b-col>
+  </b-row>
+</b-container>
+<p></p>
     </div>
   </div>
 </template>
@@ -84,5 +92,8 @@ export default {
 .map {
     width:100%;
     height: 500px;
+}
+p {
+  align-content: flex-start;
 }
 </style>

@@ -91,11 +91,13 @@ export default {
     Navigation: Navigation
   },
   methods: {
-    saveData: function () {
+    saveData: async function () {
       this.$store.commit('setFarmID', this.farmID)
       this.$store.commit('setFarmName', this.farmName)
-      db.collection('userEmail')
-        .doc(this.user.email)
+      var farmQuery = await db.collection('farms').where('email', '==', this.user.email).get()
+      var farmDocID = farmQuery.docs[0].id
+      db.collection('farms')
+        .doc(farmDocID)
         .set({
           farmName: this.farmName,
           county: this.county,
@@ -111,9 +113,11 @@ export default {
           console.error('Error writing document: ', error)
         })
     },
-    loadData: function () {
-      db.collection('userEmail')
-        .doc(this.user.email)
+    loadData: async function () {
+      var farmQuery = await db.collection('farms').where('email', '==', this.user.email).get()
+      var farmDocID = farmQuery.docs[0].id
+      db.collection('farms')
+        .doc(farmDocID)
         .get()
         .then(doc => {
           var input1 = document.getElementById('input-1')
@@ -122,10 +126,15 @@ export default {
           var input4 = document.getElementById('input-4')
 
           if (input1 != null || input2 != null || input3 != null || input4 != null) {
-            input1.placeholder = doc.data().farmName
+            input1.data = doc.data().farmName
             input2.placeholder = doc.data().farmID
             input3.placeholder = doc.data().county
             input4.placeholder = doc.data().country
+          } else {
+            input1.placeholder = document.getElementById('input-1').placeholder
+            input2.placeholder = document.getElementById('input-1').placeholder
+            input3.placeholder = document.getElementById('input-1').placeholder
+            input4.placeholder = document.getElementById('input-1').placeholder
           }
         })
     }

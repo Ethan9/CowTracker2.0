@@ -69,9 +69,11 @@ export default {
     Navigation: Navigation
   },
   methods: {
-    pullData: function () {
-      db.collection('userEmail')
-        .doc(this.user.email)
+    pullData: async function () {
+      var farmQuery = await db.collection('farms').where('email', '==', this.user.email).get()
+      var farmDocID = farmQuery.docs[0].id
+      db.collection('farms')
+        .doc(farmDocID)
         .get()
         .then(doc => {
           this.farmID = doc.data().farmID

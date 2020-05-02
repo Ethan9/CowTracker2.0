@@ -41,9 +41,9 @@ export default {
       try {
         var farmQuery = await db.collection('farms').where('email', '==', this.user.email).get()
         var farmDocID = farmQuery.docs[0].id
-        var scanQuery = await db.collection('farms').doc(farmDocID).collection('scans').where('dateTime', '==', '123').get()
+        var scanQuery = await db.collection('farms').doc(farmDocID).collection('scans').orderBy('dateTime', 'desc').get()
         var scanDocID = scanQuery.docs[0].id
-        this.unsubscribeTagListener = db.collection('farms').doc(farmDocID).collection('scans').doc(scanDocID).collection('cows')
+        var unsubscribeTagListener = db.collection('farms').doc(farmDocID).collection('scans').doc(scanDocID).collection('cows').orderBy('dateTime')
         // get right collection with email
         // access new scan
         // listen to cows collection
@@ -65,14 +65,7 @@ export default {
   },
   data () {
     return {
-      unsubscribeTagListener: null,
-      tableData: [],
-      items: [
-        { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-        { age: 38, first_name: 'Jami', last_name: 'Carney' }
-      ]
+      tableData: []
     }
   },
   computed: {
