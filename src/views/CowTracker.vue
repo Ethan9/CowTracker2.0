@@ -6,12 +6,16 @@
     <b-tabs card>
       <b-tab title="Live Feed" active>
         <b-card-text>
+          <h3>Data from most recent scan</h3>
           <b-table striped hover :items="tableData"></b-table>
         </b-card-text>
       </b-tab>
       <b-tab title="Dashboard">
         <b-card-text>
-          <pi-chart></pi-chart>
+          <h3> A graph showing the number of scans vs. time</h3>
+           <div class="small">
+              <line-chart :chart-data="datacollection"></line-chart>
+            </div>
         </b-card-text>
       </b-tab>
     </b-tabs>
@@ -26,15 +30,14 @@ import Navigation from '@/components/Nav'
 import firebase from 'firebase'
 import { db } from '@/main'
 import { mapGetters } from 'vuex'
-import { Bar } from 'vue-chartjs'
-import PiChart from '@/components/PiChart'
+import LineChart from '@/views/LineChart.js'
 var parsed
 
 export default {
   name: 'cowtracker',
   components: {
     'Navigation': Navigation,
-    PiChart
+    LineChart
   },
   methods: {
     pullData: async function () {
@@ -57,15 +60,39 @@ export default {
     },
     addToTableData: function (change) {
       if (change.type === 'added') {
-        console.log('New tagid: ', change.doc.data())
+        console.log('New tagid: ', change.doc.data().tagID)
+        this.tagTime.push(change.doc.data().dateTime.slice(0, 8))
+        this.tagNum.push(parseInt(change.doc.data().currentCowNumber))
+        console.log('New tagTime: ', this.tagTime)
+        console.log('New tagNum: ', this.tagNum)
         this.tableData.push(change.doc.data())
-        console.log(this.tableData)
       }
+    },
+    fillData: function () {
+      this.datacollection = {
+        labels: this.tagTime,
+        labelString: 'Time',
+        datasets: [
+          {
+            label: 'Scans',
+            backgroundColor: '#17a2b8',
+            pointBackgroundColor: 'black',
+            data: this.tagNum,
+            labelString: 'Time'
+          }
+        ]
+      }
+    },
+    getRandomInt: function () {
+      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
     }
   },
-  data () {
+  data: function () {
     return {
-      tableData: []
+      tableData: [],
+      tagTime: [],
+      tagNum: [],
+      datacollection: null
     }
   },
   computed: {
@@ -75,9 +102,17 @@ export default {
   },
   created: function () {
     this.pullData()
+    this.fillData()
   },
   beforeDestroy () {
     this.unsubscribeTagListener()
   }
 }
 </script>
+
+<style>
+ .small {
+    max-width: 600px;
+    margin:  50px auto;
+  }
+</style>
