@@ -10,14 +10,6 @@
   style="width: 100%; height: 800px"
 >
 <GmapCluster :styles="clusterStyles" :grid-size="gridSize">
-  <!-- <GmapCircle
-    v-for="geoObject in $options.latLONG"
-    :key="geoObject.id"
-    :center="{lat: parseFloat(geoObject.lat), lng: parseFloat(geoObject.lng)}"
-    :radius="30000"
-    :visible="true"
-    :options="{fillColor:'#379fb8',fillOpacity:1.0}"
-  ></GmapCircle> -->
    <GmapMarker
     v-for="geoObject in $options.latLONG"
     :key="geoObject.id"
@@ -26,7 +18,6 @@
     :clickable="true"
     @click="center=m.position"
   />
-
   </GmapCluster>
 </GmapMap>
 
@@ -72,13 +63,13 @@ export default {
           textSize: 1
         },
         {
-          url: mapMarkerHerdSmall,
+          url: mapMarkerHerdMedium,
           height: 70,
           width: 93,
           textSize: 1
         },
         {
-          url: mapMarkerHerdSmall,
+          url: mapMarkerHerdLarge,
           height: 100,
           width: 133,
           textSize: 1
