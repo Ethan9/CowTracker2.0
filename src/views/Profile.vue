@@ -96,6 +96,7 @@ export default {
       this.$store.commit('setFarmName', this.farmName)
       var farmQuery = await db.collection('farms').where('email', '==', this.user.email).get()
       var farmDocID = farmQuery.docs[0].id
+      console.log(farmDocID)
       db.collection('farms')
         .doc(farmDocID)
         .set({

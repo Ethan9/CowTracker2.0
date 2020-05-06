@@ -38,6 +38,7 @@
 <script>
 import firebase from 'firebase'
 import Navigation from '@/components/Nav'
+import { db } from '@/main'
 
 export default {
   name: 'signUp',
@@ -58,6 +59,15 @@ export default {
         .then(
           user => {
             this.$router.replace('profile')
+            db.collection('farms').add({
+              email: this.email
+            })
+              .then(function (docRef) {
+                console.log('Document written with ID: ', docRef.id)
+              })
+              .catch(function (error) {
+                console.error('Error adding document: ', error)
+              })
           },
           function (err) {
             alert('Oops. ' + err.message)
