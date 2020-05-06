@@ -126,15 +126,15 @@ export default {
           var input4 = document.getElementById('input-4')
 
           if (input1 != null || input2 != null || input3 != null || input4 != null) {
-            input1.data = doc.data().farmName
+            input1.placeholder = doc.data().farmName
             input2.placeholder = doc.data().farmID
             input3.placeholder = doc.data().county
             input4.placeholder = doc.data().country
           } else {
             input1.placeholder = document.getElementById('input-1').placeholder
-            input2.placeholder = document.getElementById('input-1').placeholder
-            input3.placeholder = document.getElementById('input-1').placeholder
-            input4.placeholder = document.getElementById('input-1').placeholder
+            input2.placeholder = document.getElementById('input-2').placeholder
+            input3.placeholder = document.getElementById('input-3').placeholder
+            input4.placeholder = document.getElementById('input-4').placeholder
           }
         })
     }
