@@ -42,12 +42,21 @@ firebase.auth().onAuthStateChanged((user) => {
 
 export const db = firebase.firestore()
 
-if (!app) {
-  app = new Vue({
-    router,
-    created () {
-    },
-    store: store,
-    render: h => h(App)
-  }).$mount('#app')
-}
+firebase.auth().onAuthStateChanged(async user => {
+  if (!app) {
+    // wait to get user
+    user = await firebase.auth().currentUser
+    // start app
+    app = new Vue({
+      router,
+      created () {
+        // redirect if user not logged in
+        if (!user) {
+          this.$router.push('/login')
+        }
+      },
+      store: store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+})

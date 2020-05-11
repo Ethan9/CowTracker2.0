@@ -15,7 +15,7 @@ export default {
       scales: {
         display: true,
         yAxes: [{
-          labelString: 'Testes',
+          labelString: '',
           ticks: {
             beginAtZero: true,
             padding: 25

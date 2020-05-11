@@ -4,19 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    setUser: function () {
-      this.$store.dispatch('setUser')
-    }
-  },
-  created () {
-    this.setUser()
-  }
-}
-</script>
-
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

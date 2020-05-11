@@ -8,18 +8,26 @@ import firebase from 'firebase'
 import Profile from '@/views/Profile.vue'
 import ScanScreen from '@/views/ScanScreen.vue'
 import Maps from '@/views/Maps.vue'
+import { mapGetters } from 'vuex'
 
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '*',
-      redirect: '/login'
+      redirect: '/home',
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/home',
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -78,9 +86,14 @@ router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
-  if (requiresAuth && !currentUser) next('login')
-  else if (!requiresAuth && currentUser) next('home')
-  else next()
+  if (requiresAuth && !currentUser) {
+    const loginpath = window.location.pathname
+    next({ name: 'login', query: { from: loginpath } })
+  } else if (!requiresAuth && currentUser) {
+    next('home')
+  } else {
+    next()
+  }
 })
 
 export default router
