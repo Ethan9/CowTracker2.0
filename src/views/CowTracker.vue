@@ -46,7 +46,7 @@ export default {
         var farmDocID = farmQuery.docs[0].id
         var scanQuery = await db.collection('farms').doc(farmDocID).collection('scans').orderBy('dateTime', 'desc').get()
         var scanDocID = scanQuery.docs[0].id
-        var unsubscribeTagListener = db.collection('farms').doc(farmDocID).collection('scans').doc(scanDocID).collection('cows').orderBy('dateTime')
+        this.unsubscribeTagListener = db.collection('farms').doc(farmDocID).collection('scans').doc(scanDocID).collection('cows').orderBy('dateTime')
         // get right collection with email
         // access new scan
         // listen to cows collection
@@ -60,11 +60,8 @@ export default {
     },
     addToTableData: function (change) {
       if (change.type === 'added') {
-        console.log('New tagid: ', change.doc.data().tagID)
         this.tagTime.push(change.doc.data().dateTime.slice(0, 8))
         this.tagNum.push(parseInt(change.doc.data().currentCowNumber))
-        console.log('New tagTime: ', this.tagTime)
-        console.log('New tagNum: ', this.tagNum)
         this.tableData.push(change.doc.data())
       }
     },
@@ -92,7 +89,8 @@ export default {
       tableData: [],
       tagTime: [],
       tagNum: [],
-      datacollection: null
+      datacollection: null,
+      unsubscribeTagListener: null
     }
   },
   computed: {
